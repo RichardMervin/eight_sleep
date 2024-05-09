@@ -146,12 +146,12 @@ class EightUser:  # pylint: disable=too-many-public-methods
     @property
     def target_heating_level(self) -> int | None:
         """Return target heating/cooling level."""
-        return self.device.device_data.get(f"{self.side}TargetHeatingLevel")
+        return self.device.device_data.get(f"{self.side}Kelvin", {}).get("currentTargetLevel")
 
     @property
     def heating_level(self) -> int | None:
         """Return heating/cooling level."""
-        level = self.device.device_data.get(f"{self.side}HeatingLevel")
+        level = self.device.device_data.get(f"{self.side}Kelvin", {}).get("level")
         # Update observed low
         if level is not None and level < self.observed_low:
             self.observed_low = level
