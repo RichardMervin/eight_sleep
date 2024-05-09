@@ -59,6 +59,7 @@ ATTR_REM_PERC = f"REM Sleep {PERCENTAGE}"
 ATTR_TNT = "Tosses & Turns"
 ATTR_SLEEP_STAGE = "Sleep Stage"
 ATTR_TARGET_HEAT = "Target Heating Level"
+ATTR_HEAT = "Heating Level"
 ATTR_ACTIVE_HEAT = "Heating Active"
 ATTR_DURATION_HEAT = "Heating Time Remaining"
 ATTR_PROCESSING = "Processing"
@@ -236,6 +237,7 @@ class EightHeatSensor(EightSleepBaseEntity, SensorEntity):
         assert self._user_obj
         return {
             ATTR_TARGET_HEAT: self._user_obj.target_heating_level,
+            ATTR_HEAT: self._user_obj.heating_level,
             ATTR_ACTIVE_HEAT: self._user_obj.now_heating,
             ATTR_DURATION_HEAT: self._user_obj.heating_remaining,
         }
