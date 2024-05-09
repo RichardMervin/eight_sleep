@@ -233,6 +233,7 @@ class EightSleepBaseEntity(CoordinatorEntity[DataUpdateCoordinator]):
             self._config_entry.entry_id
         ]
         await config_entry_data.heat_coordinator.async_request_refresh()
+        await config_entry_data.user_coordinator.async_request_refresh()
 
     async def async_heat_set(
         self, target: int, duration: int, sleep_stage: str
@@ -259,21 +260,11 @@ class EightSleepBaseEntity(CoordinatorEntity[DataUpdateCoordinator]):
         """Handle eight sleep side off calls."""
         await self._generic_service_call(self._user_obj.turn_off_side)
 
-        config_entry_data: EightSleepConfigEntryData = self.hass.data[DOMAIN][
-            self._config_entry.entry_id
-        ]
-        await config_entry_data.user_coordinator.async_request_refresh()
-
     async def async_side_on(
         self,
     ) -> None:
         """Handle eight sleep side on calls."""
         await self._generic_service_call(self._user_obj.turn_on_side)
-
-        config_entry_data: EightSleepConfigEntryData = self.hass.data[DOMAIN][
-            self._config_entry.entry_id
-        ]
-        await config_entry_data.user_coordinator.async_request_refresh()
 
     async def async_alarm_snooze(self, duration: int) -> None:
         """Handle eight sleep alarm snooze calls."""
